@@ -1,4 +1,5 @@
-% Solves the schrödinger equation with wave propagation
+% Solves the schrödinger equation with wave propagation for a spesific 
+% Hamiltonian
 
 % Clear memory and set format for output to screen
 clear all
@@ -7,7 +8,7 @@ format short e
 % Parametre and start value
 epsilon = 1;
 gamma = 0;
-omega = 1;
+omega = 1i;
 Psi = [1; 0];
 
 % Set timesteps
@@ -33,8 +34,13 @@ for t=tVector
     index = index+1;
 end
 
+figure('Position', [400, 400, 1000, 400])
+axes
+axis('square');
+subplot(1,2,1)
 plot(tVector, a);
 title('Probability');
-pause
+
+subplot(1,2,2)
 plot(tVector, norm);
 title('Norm');

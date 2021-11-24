@@ -22,12 +22,12 @@ LambdaTwo = @(omega) -1i.*gamma./2-sqrt(-gamma.^2-2i.*gamma+1+4*(omega).^2)./2;
 z1=zeros(N,N);
 z2=zeros(N,N);
 
-% Compute lambda 1, 2 and lambda with gamma 0
+% Compute lambda 1, 2
 [X,Y]=meshgrid(x,x);
 Grid=X+Y.*1i;
 z1=LambdaOne(Grid);
 z2=LambdaTwo(Grid);
-z3=sqrt(4.*Grid.^2)/2;
+% z3=sqrt(4.*Grid.^2)/2;
 
 C = zeros(N,N);
 % Setup for color map
@@ -53,15 +53,17 @@ for n=1:N
     end
 end
 
-for n=1:N
-    for m=1:N
-      if imag(z3(m,n))>0
-          E(m,n)=1;
-      else
-          E(m,n)=0;
-      end
-    end
-end
+% for n=1:N
+%     for m=1:N
+%       if imag(z3(m,n))>0
+%           E(m,n)=1;
+%       else
+%           E(m,n)=0;
+%       end
+%     end
+% end
+
+F = C + D;
 
 hold off
 figure(1)
@@ -91,17 +93,39 @@ title('Img lambda 2')
 xlabel('Real');
 ylabel('Imaginary');
 
-
 pause
+figure(2)
+mesh(X,Y,imag(z1))
+title('Img lambda 1')
+xlabel('Real');
+ylabel('Imaginary');
+
 figure(3)
-mesh(X,Y,imag(z3))
-title('Img lambda gamma 0')
+mesh(X,Y,imag(z2))
+title('Img lambda 2')
 xlabel('Real');
 ylabel('Imaginary');
 
 figure(4)
-mesh(X,Y,imag(z3),E)
+mesh(X,Y,F)
 view(2)
-title('Img lambda gamma 0')
+title('Combined sign');
 xlabel('Real');
 ylabel('Imaginary');
+
+
+
+
+% pause
+% figure(5)
+% mesh(X,Y,imag(z3))
+% title('Img lambda gamma 0')
+% xlabel('Real');
+% ylabel('Imaginary');
+% 
+% figure(2)
+% mesh(X,Y,imag(z3),E)
+% view(2)
+% title('Img lambda gamma 0')
+% xlabel('Real');
+% ylabel('Imaginary');
